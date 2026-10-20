@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "GameFramework/Character.h"
 #include "EnemyActor.generated.h"
 
 enum EnemyState
@@ -15,7 +15,7 @@ enum EnemyState
 };
 
 UCLASS()
-class COMBATDEMO_API AEnemyActor : public AActor
+class COMBATDEMO_API AEnemyActor : public ACharacter
 {
 	GENERATED_BODY()
 	
@@ -24,10 +24,10 @@ public:
 	AEnemyActor();
 
 	UPROPERTY(VisibleAnywhere)
-	class USkeletalMeshComponent* Mesh;
-
-	UPROPERTY(VisibleAnywhere)
 	class UWidgetComponent* HealthBarWidget;
+
+	UPROPERTY(EditAnywhere,Category="Combat")
+	float AttackDamage = 10.0f;
 
 	float HP;
 	float MaxHP;
@@ -37,6 +37,9 @@ public:
 	EnemyState CurrentState;
 
 	void ApplyDamage(float Damage);
+
+	FTimerHandle AttackHitTimer;
+	void CheckAttackHit();
 
 
 protected:

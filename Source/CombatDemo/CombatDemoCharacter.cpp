@@ -146,7 +146,7 @@ void ACombatDemoCharacter::LightAttack()
 	if (AnimInstance && AnimInstance->Montage_IsPlaying(nullptr))
 	{
 		return;   // ÕıÔÚ²¥¶¯»­£¬ºöÂÔ
-	}
+	};
 
 	if (AnimInstance)
 	{

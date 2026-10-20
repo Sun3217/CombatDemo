@@ -14,6 +14,17 @@ class COMBATDEMO_API UCombatComponent : public UActorComponent
 public:
 	UCombatComponent();
 
+	UPROPERTY(EditAnywhere,Category="Combat")
+	float AttackRange = 140.0f;
+
+	UPROPERTY(EditAnywhere,Category="Combat")
+	float MaxHP = 60.0f;
+
+	UPROPERTY(EditAnywhere,Category="Combat")
+	TSubclassOf<class UCameraShakeBase>HitShakeClass;
+
+	UPROPERTY(EditAnywhere,Category="UI")
+	TSubclassOf<class UUserWidget>HealthWidgetClass;
 	float HP;
 	float ATK;
 
@@ -22,6 +33,17 @@ public:
 
 	AActor* CurrentEnemy;
 
+	UFUNCTION(BlueprintCallable)
+	void ApplyDamage(float Damage);
+
+	void RefreshHealthUI();
+
+private:
+	UPROPERTY()
+	class UUserWidget* HealthWidget = nullptr;
+
+	FTimerHandle RestartTimer;
+	void RestartLevel();
 protected:
 	virtual void BeginPlay() override;
 
